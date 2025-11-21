@@ -27,8 +27,8 @@ jobs:
       
       - name: Install, build, and upload your site
         uses: withastro/action@v2
-        # with:
-          # package-manager: npm # Uncomment if you aren't using pnpm/yarn
+        with:
+          package-manager: npm
 
   deploy:
     needs: build
