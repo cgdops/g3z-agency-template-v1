@@ -5,30 +5,55 @@ import Hero from '../components/Hero.astro';
 import Features from '../components/Features.astro';
 import Footer from '../components/Footer.astro';
 
-// Import the AI-generated content
-// Note: We use a try/catch or default object in case the JSON is missing during initial setup
+// Import the JSON. If the file is empty/broken, 'contentData' might be unexpected.
 import contentData from '../data/site-content.json';
-const content = contentData || {
-  meta: { title: "Default Title", description: "Default Desc" },
-  hero: { headline: "Welcome", subheadline: "Loading...", ctaText: "Click me" },
-  contact: { email: "info@example.com", phone: "555-5555" },
-  features: []
+
+// Safety Net: Ensure every piece of data exists even if the JSON is missing it.
+const content = {
+  meta: { 
+    title: contentData?.meta?.title || "Agency Site", 
+    description: contentData?.meta?.description || "Welcome" 
+  },
+  colors: {
+    primary: contentData?.colors?.primary || "blue-600",
+    secondary: contentData?.colors?.secondary || "gray-100"
+  },
+  hero: { 
+    headline: contentData?.hero?.headline || "Welcome to our site", 
+    subheadline: contentData?.hero?.subheadline || "We provide excellent service.", 
+    ctaText: contentData?.hero?.ctaText || "Get Started",
+    ctaLink: contentData?.hero?.ctaLink || "#contact"
+  },
+  // Safe fallback for contact info
+  contact: {
+    email: contentData?.contact?.email || "hello@example.com",
+    phone: contentData?.contact?.phone || "(555) 000-0000"
+  },
+  // Safe fallback for features array
+  features: Array.isArray(contentData?.features) ? contentData.features : [
+    { title: "Feature 1", description: "Description here", icon: "star" },
+    { title: "Feature 2", description: "Description here", icon: "star" }
+  ]
 };
 ---
 
 <Layout title={content.meta.title} description={content.meta.description}>
-  <main>
+  <main class="antialiased text-gray-900">
+    
     <Navbar company={content.meta.title} contact={content.contact} />
     
     <Hero 
       headline={content.hero.headline} 
       subheadline={content.hero.subheadline} 
-      cta={content.hero.ctaText}
-      color={content.colors?.primary}
+      cta={content.hero.ctaText} 
+      color={content.colors.primary}
     />
     
-    <Features features={content.features} />
+    <Features 
+      features={content.features} 
+    />
     
     <Footer contact={content.contact} />
+    
   </main>
 </Layout>
