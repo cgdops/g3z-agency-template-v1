@@ -1,1 +1,32 @@
-{"meta":{"title":"Ancat Media Group - Innovative Broadcasting Solutions","description":"Leading the way in broadcast media with cutting-edge solutions and innovative programming."},"hero":{"headline":"Welcome to Ancat Media Group","subheadline":"Transforming the Future of Broadcast Media","ctaText":"Explore Our Services"},"features":[{"title":"Creative Content","description":"Engage audiences with diverse programming that captures imagination.","icon":"creativity_icon.png"},{"title":"Technological Innovation","description":"Utilize the latest technology to deliver content seamlessly across platforms.","icon":"tech_innovation_icon.png"},{"title":"Global Reach","description":"Connect with viewers worldwide through our expansive network.","icon":"global_icon.png"}]}
+{
+  "meta": {
+    "title": "Ancat Media Group",
+    "description": "Leading Broadcast Media Solutions"
+  },
+  "colors": {
+    "primary": "indigo-600", 
+    "secondary": "gray-50"
+  },
+  "hero": {
+    "headline": "Broadcasting the Future",
+    "subheadline": "Innovative media strategies for the modern age.",
+    "ctaText": "Contact Us",
+    "ctaLink": "#contact"
+  },
+  "features": [
+    {
+      "title": "Digital Distribution",
+      "icon": "globe",
+      "description": "Global reach for your media content."
+    },
+    {
+      "title": "Media Analytics",
+      "icon": "chart",
+      "description": "Real-time insights into viewer engagement."
+    }
+  ],
+  "contact": {
+    "email": "contact@ancatmedia.com",
+    "phone": "(212) 555-0199"
+  }
+}
