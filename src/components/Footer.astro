@@ -1,0 +1,13 @@
+---
+const { contact } = Astro.props;
+---
+<footer class="bg-white border-t border-gray-200" id="contact">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-base text-gray-400">
+      Contact us: <a href={`mailto:${contact.email}`} class="text-blue-600 hover:underline">{contact.email}</a>
+    </p>
+    <p class="mt-2 text-center text-base text-gray-400">
+      &copy; {new Date().getFullYear()} All rights reserved.
+    </p>
+  </div>
+</footer>
