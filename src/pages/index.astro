@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Features from '../components/Features.astro';
 import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
 
 // Import the JSON. If the file is empty/broken, 'contentData' might be unexpected.
 import contentData from '../data/site-content.json';
@@ -52,6 +53,8 @@ const content = {
     <Features 
       features={content.features} 
     />
+
+    <ContactForm clientName={content.meta.title} />
     
     <Footer contact={content.contact} />
     
