@@ -1,5 +1,22 @@
 ---
+import content from '../data/site-content.json';
 const { title, description } = Astro.props;
+
+// Construct the Schema for AI
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": content.meta.title,
+  "description": content.meta.description,
+  "telephone": content.contact.phone,
+  "email": content.contact.email,
+  "url": `https://${Astro.site?.host}${Astro.site?.pathname}`, 
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Miami", // You can add this to your JSON later
+    "addressRegion": "FL"
+  }
+};
 ---
 
 <!DOCTYPE html>
