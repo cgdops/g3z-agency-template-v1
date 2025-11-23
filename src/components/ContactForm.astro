@@ -1,0 +1,87 @@
+---
+const { clientName } = Astro.props;
+---
+
+<div class="bg-white py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24" id="contact-form">
+  <div class="relative max-w-xl mx-auto">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Contact Us</h2>
+      <p class="mt-4 text-lg leading-6 text-gray-500">
+        We'd love to hear from you. Send us a message below.
+      </p>
+    </div>
+    <div class="mt-12">
+      <form id="agency-form" class="grid grid-cols-1 gap-y-6">
+        
+        <input type="hidden" name="client_name" value={clientName} />
+
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <div class="mt-1">
+            <input type="text" name="name" id="name" autocomplete="name" required class="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md border">
+          </div>
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <div class="mt-1">
+            <input type="email" name="email" id="email" autocomplete="email" required class="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md border">
+          </div>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+          <div class="mt-1">
+            <textarea id="message" name="message" rows="4" required class="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border border-gray-300 rounded-md"></textarea>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Submit
+          </button>
+        </div>
+        
+        <div id="form-status" class="hidden text-center text-sm font-medium mt-4"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ webhookUrl: "https://n8n.srv1051492.hstgr.cloud/webhook/submit-form" }}>
+  // This runs on the client side
+  const form = document.getElementById('agency-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Change button text to loading...
+    const btn = form.querySelector('button');
+    const originalText = btn.innerText;
+    btn.innerText = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      status.innerText = "Message sent successfully!";
+      status.classList.remove('hidden');
+      status.classList.add('text-green-600');
+      form.reset();
+    } catch (error) {
+      status.innerText = "Something went wrong. Please try again.";
+      status.classList.remove('hidden');
+      status.classList.add('text-red-600');
+    } finally {
+      btn.innerText = originalText;
+      btn.disabled = false;
+    }
+  });
+</script>
