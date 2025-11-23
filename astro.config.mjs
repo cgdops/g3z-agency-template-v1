@@ -1,11 +1,15 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Add Tailwind support
-  integrations: [tailwind()],
+  integrations: [
+    tailwind(),
+    sitemap()
+  ],
 
   // vital for GitHub Pages hosting
-  site: 'https://github.com',
+  site: 'https://cgdops.github.com',
   base: '/g3z-agency-template-v1', 
 });
