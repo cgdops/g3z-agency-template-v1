@@ -10,6 +10,6 @@ export default defineConfig({
   ],
 
   // vital for GitHub Pages hosting
-  site: 'https://ancatmediagroup.com',
-  //base: '/g3z-agency-template-v1', 
+  site: 'https://cgdops.github.io',
+  base: '/g3z-agency-template-v1', 
 });
